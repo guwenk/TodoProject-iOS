@@ -11,6 +11,7 @@
 		8469B23B215046FE00E10FD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8469B239215046FE00E10FD6 /* Main.storyboard */; };
 		8469B23D215046FF00E10FD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8469B23C215046FF00E10FD6 /* Assets.xcassets */; };
 		8469B240215046FF00E10FD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8469B23E215046FF00E10FD6 /* LaunchScreen.storyboard */; };
+		8483B029215135E000FFB768 /* NewTodoNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483B028215135E000FFB768 /* NewTodoNameCell.swift */; };
 		84E681EA21504936002A4F50 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E681E921504936002A4F50 /* TableViewCell.swift */; };
 		84E681F02150497B002A4F50 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E681EF2150497B002A4F50 /* TableViewController.swift */; };
 		84E681F22150498E002A4F50 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E681F12150498E002A4F50 /* Model.swift */; };
@@ -26,6 +27,7 @@
 		8469B23C215046FF00E10FD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8469B23F215046FF00E10FD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8469B241215046FF00E10FD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8483B028215135E000FFB768 /* NewTodoNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTodoNameCell.swift; sourceTree = "<group>"; };
 		84E681E921504936002A4F50 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		84E681EF2150497B002A4F50 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		84E681F12150498E002A4F50 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -76,13 +78,14 @@
 				8469B235215046FE00E10FD6 /* AppDelegate.swift */,
 				84E681F12150498E002A4F50 /* Model.swift */,
 				84E681EF2150497B002A4F50 /* TableViewController.swift */,
-				84E681E921504936002A4F50 /* TableViewCell.swift */,
+				84E6820021505483002A4F50 /* NewTodoTableViewController.swift */,
 				8469B239215046FE00E10FD6 /* Main.storyboard */,
 				8469B23C215046FF00E10FD6 /* Assets.xcassets */,
 				8469B23E215046FF00E10FD6 /* LaunchScreen.storyboard */,
 				8469B241215046FF00E10FD6 /* Info.plist */,
-				84E6820021505483002A4F50 /* NewTodoTableViewController.swift */,
 				84E6820221506C02002A4F50 /* TableViewSection.swift */,
+				8483B028215135E000FFB768 /* NewTodoNameCell.swift */,
+				84E681E921504936002A4F50 /* TableViewCell.swift */,
 			);
 			path = TodoProject;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				8469B236215046FE00E10FD6 /* AppDelegate.swift in Sources */,
 				84E681F02150497B002A4F50 /* TableViewController.swift in Sources */,
 				84E681EA21504936002A4F50 /* TableViewCell.swift in Sources */,
+				8483B029215135E000FFB768 /* NewTodoNameCell.swift in Sources */,
 				84E6820321506C02002A4F50 /* TableViewSection.swift in Sources */,
 				84E6820121505483002A4F50 /* NewTodoTableViewController.swift in Sources */,
 				84E681F22150498E002A4F50 /* Model.swift in Sources */,
@@ -379,6 +383,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H33846KG6D;
 				INFOPLIST_FILE = TodoProject/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -388,7 +393,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.guwenk.TodoProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -398,6 +403,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H33846KG6D;
 				INFOPLIST_FILE = TodoProject/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -407,7 +413,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.guwenk.TodoProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

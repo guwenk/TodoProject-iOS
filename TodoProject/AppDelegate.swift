@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  TodoProject
-//
-//  Created by Admin on 17.09.2018.
-//  Copyright © 2018 guwenk. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
