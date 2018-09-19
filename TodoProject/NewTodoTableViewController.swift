@@ -23,6 +23,12 @@ class NewTodoTableViewController: UITableViewController {
     @IBAction func onBackClicked(_ sender: Any) {
         dismiss(animated: true)
     }
+    
+    func uiShowAlert(title: String, message: String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2;

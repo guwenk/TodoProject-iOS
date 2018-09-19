@@ -16,7 +16,7 @@ class TableViewCell: UITableViewCell {
             let strokeEffect: [NSAttributedStringKey : Any] = [NSAttributedStringKey.strikethroughStyle: NSUnderlineStyle.styleSingle.rawValue]
             labelText.attributedText = NSAttributedString(string: labelText.text!, attributes: strokeEffect)
         } else {
-            labelText.text = labelText.text!
+            labelText.attributedText = NSAttributedString(string: labelText.text!)
         }
     }
 }

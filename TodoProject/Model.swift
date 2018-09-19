@@ -13,41 +13,59 @@ struct ProjectItem: Codable {
     var todos: [TodoItem]
 }
 
-var Projects: [ProjectItem] = [
-    ProjectItem(id: 1, title: "Семья", todos: [
-        TodoItem(id: 1, text: "What is love?", isCompleted: false),
-        TodoItem(id: 2, text: "Baby don't hurt me", isCompleted: false),
-        TodoItem(id: 3, text: "Don't hurt me", isCompleted: true),
-        TodoItem(id: 4, text: "No more", isCompleted: false),
-        ]),
-    ProjectItem(id: 2, title: "Работа", todos: [
-        TodoItem(id: 5, text: "Never gonna give you up", isCompleted: true),
-        TodoItem(id: 6, text: "Never gonna let you down", isCompleted: false),
-        TodoItem(id: 7, text: "Never gonna run around and desert you", isCompleted: false),
-        TodoItem(id: 8, text: "Never gonna make you cry", isCompleted: true),
-        TodoItem(id: 9, text: "Never gonna say goodbye", isCompleted: false),
-        TodoItem(id: 10, text: "Never gonna tell a lie and hurt you", isCompleted: false)
-        ]),
-    ProjectItem(id: 3, title: "Прочее", todos: [
-        TodoItem(id: 11, text: "Push me", isCompleted: true),
-        TodoItem(id: 12, text: "And then just touch me", isCompleted: false),
-        TodoItem(id: 13, text: "Till I can get my satisfaction", isCompleted: false),
-        ]),
-]
+let api_url = "https://ancient-badlands-76801.herokuapp.com"
 
-func toggleTodo(section: Int, row: Int, cell: TableViewCell){
+var Projects: [ProjectItem] = []
+
+func toggleTodo(section: Int, row: Int, cell: TableViewCell, controller: TableViewController){
     Projects[section].todos[row].isCompleted = !Projects[section].todos[row].isCompleted
     cell.toggle()
-    //post request
+    
+    let todoID = Projects[section].todos[row].id
+    let params: Parameters = ["isCompleted": Projects[section].todos[row].isCompleted]
+    
+    Alamofire.request(api_url+"/projects/0/todos/"+String(todoID)+"/toggle", method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { response in
+        switch response.result{
+        case .success:
+            print("Toggle Success")
+        case .failure:
+            print("Toggle Failed")
+            Projects[section].todos[row].isCompleted = !Projects[section].todos[row].isCompleted
+            cell.toggle()
+            controller.uiShowAlert(title: "Ошибка сети", message: "Не удалось изменить статус")
+        }
+    }
 }
 
 func addTodoItem(project_id: Int, text: String, controller: NewTodoTableViewController){
-    Projects[project_id-1].todos.append(TodoItem(id: 0, text: text, isCompleted: false)) //to replace
-    controller.dismiss(animated: true)
-    //post request
+    let params: Parameters = ["todo":["text": text, "project_id": project_id]]
+    
+    Alamofire.request(api_url+"/projects/0/todos/", method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { response in
+        switch response.result{
+        case .success:
+            print("Add Todo Success")
+            controller.dismiss(animated: true)
+        case .failure:
+            print("Add Todo Failed")
+            controller.uiShowAlert(title: "Ошибка сети", message: "Не удалось добавить задачу")
+        }
+    }
 }
 
 func downloadData(controller: TableViewController){
+    Projects = []
     controller.tableView.reloadData()
-    //TODO download data
+    controller.uiDataLoadInProgress()
+    Alamofire.request(api_url+"/projects.json").responseJSON { response in
+        switch response.result{
+        case .success:
+            if let data = response.data {
+                let decoder = JSONDecoder()
+                Projects = try! decoder.decode(Array<ProjectItem>.self, from: data)
+                controller.uiDataLoadSuccess()
+            }
+        case .failure:
+            controller.uiDataLoadFailed()
+        }
+    }
 }

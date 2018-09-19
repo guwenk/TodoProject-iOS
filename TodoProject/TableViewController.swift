@@ -10,8 +10,6 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //navigationItem.rightBarButtonItem?.isEnabled = false
-        
         reloadButton.frame = CGRect(x: tableView.center.x - 75, y: tableView.center.y - 25, width: 150, height: 50)
         reloadButton.setTitle("Reload", for: .normal)
         reloadButton.titleLabel?.font = UIFont(name: "OpenSans-Regular", size: 35)
@@ -28,8 +26,26 @@ class TableViewController: UITableViewController {
         downloadData(controller: self)
     }
     
-    func todoToggle(){
-        
+    func uiDataLoadInProgress(){
+        self.tableView.backgroundView = activityIndicatorView
+        navigationItem.rightBarButtonItem?.isEnabled = false
+    }
+    
+    func uiDataLoadFailed(){
+        self.tableView.backgroundView = reloadButton
+        navigationItem.rightBarButtonItem?.isEnabled = false
+    }
+    
+    func uiDataLoadSuccess(){
+        navigationItem.rightBarButtonItem?.isEnabled = true
+        self.tableView.backgroundView = nil
+        self.tableView.reloadData()
+    }
+    
+    func uiShowAlert(title: String, message: String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -65,6 +81,6 @@ class TableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         let cell = tableView.cellForRow(at: indexPath) as! TableViewCell
         
-        toggleTodo(section: indexPath.section, row: indexPath.row, cell: cell)
+        toggleTodo(section: indexPath.section, row: indexPath.row, cell: cell, controller: self)
     }
 }
